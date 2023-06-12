@@ -1,3 +1,6 @@
+import MovieDetails from 'pages/MovieDetails';
+import Movies from 'pages/Movies';
+import Home from 'pages/Home';
 import { Routes, Route, NavLink } from 'react-router-dom';
 
 export const App = () => {
@@ -6,22 +9,22 @@ export const App = () => {
       style={{
         height: '100vh',
         display: 'flex',
+        gap: '30px',
         justifyContent: 'center',
+        flexDirection: 'column',
         alignItems: 'center',
         fontSize: 40,
         color: '#010101',
       }}
     >
-      <nav>
+      <nav style={{ display: 'flex', gap: '30px' }}>
         <NavLink to="/">Home page</NavLink>
         <NavLink to="/movies">Movies</NavLink>
       </nav>
       <Routes>
-        <Route path="/" element={<div>Тут буде домашня сторінка</div>} />
-        <Route
-          path="/movies"
-          element={<div>тут буде сторінка пошуку фільмів</div>}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies/:movieId" element={<MovieDetails />} />
       </Routes>
     </div>
   );
