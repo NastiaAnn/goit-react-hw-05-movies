@@ -14,7 +14,7 @@ const Home = () => {
       {['movie1', 'movie2', 'movie3', 'movie4', 'movie5', 'movie6'].map(
         movie => {
           return (
-            <Link key={movie} to={`${'movies/movieID'}`}>
+            <Link key={movie} to={`/movies/${movie}`}>
               {movie}
             </Link>
           );
