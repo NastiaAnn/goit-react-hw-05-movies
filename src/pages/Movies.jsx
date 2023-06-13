@@ -1,22 +1,23 @@
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Movies = () => {
-  // const [movie, setMovie] = useState('');
+  const movies = ['movie1', 'movie2', 'movie3', 'movie4', 'movie5', 'movie6'];
+
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query');
+  const query = searchParams.get('query') ?? '';
+
+  const visibleMovies = movies.filter(movie => movie.includes(query));
 
   useEffect(() => {
-    // Тут виконуємо асинхронну операцію,
-    // наприклад HTTP-запит за інформацією про користувача
-    if (query === '') return;
+    if (query === null) return;
 
-    // async function fetchUser() {
-    //   const user = await FakeAPI.getUser(username);
-    //   setUser(user);
-    // }
+    // Ваша асинхронна операція, наприклад HTTP-запит за інформацією про фільми
+    async function fetchMovies() {
+      // Виконайте тут ваші асинхронні дії
+    }
 
-    // fetchUser();
+    fetchMovies();
   }, [query]);
 
   const handleSubmit = event => {
@@ -26,13 +27,30 @@ const Movies = () => {
     form.reset();
   };
 
+  const updateQueryString = event => {
+    const movieIdValue = event.target.value;
+    if (movieIdValue === '') {
+      return setSearchParams({});
+    }
+    setSearchParams({ query: movieIdValue });
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <input type="text" name="query" />
-      </label>
-      <button type="submit">Search</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          <input type="text" name="query" onChange={updateQueryString} />
+        </label>
+        <button type="submit">Search</button>
+      </form>
+      <ul>
+        {visibleMovies.map(movie => (
+          <li key={movie}>
+            <Link to={`${movie}`}>{movie}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
