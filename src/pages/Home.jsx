@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getMovies } from 'services/TmdbApi';
+import { TrendingMovies } from 'components/TrendingMovies/TrendingMovies';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -27,13 +28,7 @@ const Home = () => {
         flexDirection: 'column',
       }}
     >
-      {trendingMovies.map(({ id, title }) => {
-        return (
-          <Link key={id} to={`/movies/${id}`} state={{ from: location }}>
-            {title}
-          </Link>
-        );
-      })}
+      <TrendingMovies trendingMovies={trendingMovies} location={location} />
     </div>
   );
 };

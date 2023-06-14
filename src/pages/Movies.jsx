@@ -1,6 +1,8 @@
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { handleMoviesSearch } from 'services/TmdbApi';
+import { SearchBar } from 'components/SearchBar/SearchBar';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -41,21 +43,8 @@ const Movies = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input type="text" name="query" onChange={updateQueryString} />
-        </label>
-        <button type="submit">Search</button>
-      </form>
-      <ul>
-        {movies.map(({ id, title }) => (
-          <li key={id}>
-            <Link to={`/movies/${id}`} state={{ from: location }}>
-              {title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <SearchBar handleSubmit={handleSubmit} updateString={updateQueryString} />
+      <MoviesList movies={movies} location={location} />
     </div>
   );
 };
