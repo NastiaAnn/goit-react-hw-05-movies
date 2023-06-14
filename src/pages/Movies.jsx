@@ -1,11 +1,12 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Movies = () => {
   const movies = ['movie1', 'movie2', 'movie3', 'movie4', 'movie5', 'movie6'];
-
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
+
+  const location = useLocation();
 
   const visibleMovies = movies.filter(movie => movie.includes(query));
 
@@ -46,7 +47,9 @@ const Movies = () => {
       <ul>
         {visibleMovies.map(movie => (
           <li key={movie}>
-            <Link to={`${movie}`}>{movie}</Link>
+            <Link to={`${movie}`} state={{ from: location }}>
+              {movie}
+            </Link>
           </li>
         ))}
       </ul>

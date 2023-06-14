@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Home = () => {
   // may do http request
+  const location = useLocation();
 
   return (
     <div
@@ -14,7 +15,11 @@ const Home = () => {
       {['movie1', 'movie2', 'movie3', 'movie4', 'movie5', 'movie6'].map(
         movie => {
           return (
-            <Link key={movie} to={`/movies/${movie}`}>
+            <Link
+              key={movie}
+              to={`/movies/${movie}`}
+              state={{ from: location }}
+            >
               {movie}
             </Link>
           );
