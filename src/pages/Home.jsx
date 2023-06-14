@@ -1,7 +1,22 @@
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { getMovies } from 'services/TmdbApi';
 
 const Home = () => {
-  // may do http request
+  const [trendingMovies, setTrendingMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const movies = await getMovies();
+        setTrendingMovies(movies.data.results);
+      } catch (error) {
+        console.log('Error');
+      }
+    };
+    fetchMovies();
+  }, []);
+
   const location = useLocation();
 
   return (
@@ -12,19 +27,13 @@ const Home = () => {
         flexDirection: 'column',
       }}
     >
-      {['movie1', 'movie2', 'movie3', 'movie4', 'movie5', 'movie6'].map(
-        movie => {
-          return (
-            <Link
-              key={movie}
-              to={`/movies/${movie}`}
-              state={{ from: location }}
-            >
-              {movie}
-            </Link>
-          );
-        }
-      )}
+      {trendingMovies.map(({ id, title }) => {
+        return (
+          <Link key={id} to={`/movies/${id}`} state={{ from: location }}>
+            {title}
+          </Link>
+        );
+      })}
     </div>
   );
 };

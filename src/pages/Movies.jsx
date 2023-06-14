@@ -1,25 +1,28 @@
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { handleMoviesSearch } from 'services/TmdbApi';
 
 const Movies = () => {
-  const movies = ['movie1', 'movie2', 'movie3', 'movie4', 'movie5', 'movie6'];
+  const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
   const query = searchParams.get('query') ?? '';
-
   const location = useLocation();
-
-  const visibleMovies = movies.filter(movie => movie.includes(query));
 
   useEffect(() => {
     if (query === null) return;
 
-    // Ваша асинхронна операція, наприклад HTTP-запит за інформацією про фільми
-    async function fetchMovies() {
-      // Виконайте тут ваші асинхронні дії
-    }
-
-    fetchMovies();
+    getSearchedMovies(query);
   }, [query]);
+
+  const getSearchedMovies = async query => {
+    try {
+      const searchedMovies = await handleMoviesSearch(query);
+      setMovies(searchedMovies.data.results);
+    } catch (error) {
+      console.log('Error');
+    }
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -45,10 +48,10 @@ const Movies = () => {
         <button type="submit">Search</button>
       </form>
       <ul>
-        {visibleMovies.map(movie => (
-          <li key={movie}>
-            <Link to={`${movie}`} state={{ from: location }}>
-              {movie}
+        {movies.map(({ id, title }) => (
+          <li key={id}>
+            <Link to={`/movies/${id}`} state={{ from: location }}>
+              {title}
             </Link>
           </li>
         ))}
