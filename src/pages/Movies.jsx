@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { handleMoviesSearch } from 'services/TmdbApi';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MoviesList } from 'components/MoviesList/MoviesList';
+// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -12,9 +13,12 @@ const Movies = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (query === null) return;
+    if (query === null)
+      // return Notify.warning(
+      //   'Empty line. Please enter something in the search field'
+      // );
 
-    getSearchedMovies(query);
+      getSearchedMovies(query);
   }, [query]);
 
   const getSearchedMovies = async query => {

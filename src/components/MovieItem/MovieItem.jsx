@@ -13,7 +13,7 @@ export const MovieItem = ({ movie }) => {
     overview,
     genres,
     release_date,
-    popularity,
+    vote_average,
   } = movie;
   return (
     <MovieSection>
@@ -25,7 +25,9 @@ export const MovieItem = ({ movie }) => {
         <MovieName>
           {original_title} ({release_date && release_date.substring(0, 4)})
         </MovieName>
-        <Heading>User Score: {popularity ? popularity.toFixed() : '0'}</Heading>
+        <Heading>
+          User Score: {vote_average ? Math.floor(vote_average * 10) : '0'}%
+        </Heading>
         <Heading>Overview</Heading>
         <OverviewText>{overview}</OverviewText>
         <Heading>Genres</Heading>

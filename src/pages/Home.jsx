@@ -20,6 +20,8 @@ const Home = () => {
 
   const location = useLocation();
 
+  console.log(trendingMovies);
+
   return (
     <div
       style={{

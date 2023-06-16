@@ -17,11 +17,11 @@ const StyledLink = styled(Link)`
 export const TrendingMovies = ({ trendingMovies, location }) => {
   return (
     <TrendingMovieList>
-      {trendingMovies.map(({ id, title }) => {
+      {trendingMovies.map(({ id, title, name }) => {
         return (
           <TrendingMovieName key={id}>
             <StyledLink to={`/movies/${id}`} state={{ from: location }}>
-              {title}
+              {title || name}
             </StyledLink>
           </TrendingMovieName>
         );

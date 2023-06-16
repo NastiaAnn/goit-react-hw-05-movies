@@ -22,7 +22,11 @@ const Reviews = () => {
 
   return (
     <section>
-      <ReviewHeader>Review of the film</ReviewHeader>
+      {reviews.length === 0 && (
+        <ReviewHeader>
+          Sorry, we don't have any reviews for this film!
+        </ReviewHeader>
+      )}
       <ReviewList>
         {reviews.map(({ id, author, content }) => {
           return (

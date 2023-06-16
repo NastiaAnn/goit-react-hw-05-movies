@@ -9,13 +9,13 @@ export const MovieSection = styled.section`
 
 export const MovieName = styled.div`
   text-decoration: underline;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
 `;
 
 export const Heading = styled.div`
   text-decoration: none;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: bold;
 `;
 
