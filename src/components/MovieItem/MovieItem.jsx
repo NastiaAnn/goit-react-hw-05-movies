@@ -5,6 +5,7 @@ import {
   OverviewText,
   DescriptionSection,
 } from './styled';
+import PropTypes from 'prop-types';
 
 export const MovieItem = ({ movie }) => {
   const {
@@ -37,4 +38,7 @@ export const MovieItem = ({ movie }) => {
       </DescriptionSection>
     </MovieSection>
   );
+};
+MovieItem.propTypes = {
+  movie: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

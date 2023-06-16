@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { TrendingMovieList, TrendingMovieName } from './styled';
+import PropTypes from 'prop-types';
 
 const StyledLink = styled(Link)`
   color: black;
@@ -28,4 +29,11 @@ export const TrendingMovies = ({ trendingMovies, location }) => {
       })}
     </TrendingMovieList>
   );
+};
+
+TrendingMovies.propTypes = {
+  trendingMovies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
