@@ -1,11 +1,31 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { TrendingMovieList, TrendingMovieName } from './styled';
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+  list-style: auto;
+  font-size: 20px;
+  font-weight: normal;
+
+  :hover {
+    color: orange;
+  }
+`;
 
 export const TrendingMovies = ({ trendingMovies, location }) => {
-  return trendingMovies.map(({ id, title }) => {
-    return (
-      <Link key={id} to={`/movies/${id}`} state={{ from: location }}>
-        {title}
-      </Link>
-    );
-  });
+  return (
+    <TrendingMovieList>
+      {trendingMovies.map(({ id, title }) => {
+        return (
+          <TrendingMovieName key={id}>
+            <StyledLink to={`/movies/${id}`} state={{ from: location }}>
+              {title}
+            </StyledLink>
+          </TrendingMovieName>
+        );
+      })}
+    </TrendingMovieList>
+  );
 };

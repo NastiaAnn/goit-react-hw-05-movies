@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { handleMoviesReviews } from 'services/TmdbApi';
 import { useEffect, useState } from 'react';
+import { ReviewHeader, AuthorName, Text, ReviewList } from './styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -21,17 +22,17 @@ const Reviews = () => {
 
   return (
     <section>
-      <div>Review of the film</div>
-      <ul>
+      <ReviewHeader>Review of the film</ReviewHeader>
+      <ReviewList>
         {reviews.map(({ id, author, content }) => {
           return (
             <li key={id}>
-              <div> Author: {author}</div>
-              <div>{content}</div>
+              <AuthorName> Author: {author}</AuthorName>
+              <Text>{content}</Text>
             </li>
           );
         })}
-      </ul>
+      </ReviewList>
     </section>
   );
 };

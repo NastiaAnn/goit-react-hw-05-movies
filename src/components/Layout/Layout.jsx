@@ -1,13 +1,22 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
+import styled from 'styled-components';
+
+export const StyledLink = styled(NavLink)`
+  color: black;
+
+  &.active {
+    color: orange;
+  }
+`;
 
 const Layout = () => {
   return (
     <div>
       <header>
         <nav style={{ display: 'flex', gap: '30px' }}>
-          <NavLink to="/">Home page</NavLink>
-          <NavLink to="/movies">Movies</NavLink>
+          <StyledLink to="/">Home page</StyledLink>
+          <StyledLink to="/movies">Movies</StyledLink>
         </nav>
       </header>
       <main>

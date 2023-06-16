@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { handleMoviesCast } from 'services/TmdbApi';
+import { CastHeader, ActorName, Character, ActorsList } from './styled';
 
 const Cast = () => {
   const [searchedCast, setSearchedCast] = useState([]);
@@ -19,9 +20,9 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <section>
-      <div>Cast of the film</div>
-      <ul>
+    <section style={{ height: '800px', overflow: 'auto' }}>
+      <CastHeader>Cast of the film</CastHeader>
+      <ActorsList>
         {searchedCast.map(({ id, name, character, profile_path }) => {
           return (
             <li key={id}>
@@ -29,12 +30,12 @@ const Cast = () => {
                 src={`https://image.tmdb.org/t/p/w200${profile_path}`}
                 alt={name}
               />
-              <div>{name}</div>
-              <div>{character && `Character: ${character}`}</div>
+              <ActorName>{name}</ActorName>
+              <Character>{character && `Character: ${character}`}</Character>
             </li>
           );
         })}
-      </ul>
+      </ActorsList>
     </section>
   );
 };
